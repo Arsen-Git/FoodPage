@@ -1,0 +1,52 @@
+.navigation {
+  padding: 50px 100px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-image: linear-gradient(
+    to right,
+    transparent 50%,
+    #effdff 50% 100%
+  );
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    &__logo {
+      padding-right: 60px;
+    }
+    &__link {
+      position: relative;
+      font-weight: 700;
+      font-size: 18px;
+      color: #303030;
+      text-decoration: none;
+      &::after {
+        content: "";
+        z-index: -1;
+        display: block;
+        position: absolute;
+        width: 110%;
+        height: 8px;
+        bottom: -4px;
+        left: -5%;
+        background-color: #54ed39;
+      }
+    }
+  }
+  &__modalBtn {
+    box-sizing: border-box;
+
+    padding: 20px 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+
+    font-weight: 700;
+    font-size: 18px;
+    color: #303030;
+
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+  }
+}
