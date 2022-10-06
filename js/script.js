@@ -90,3 +90,57 @@ slider.addEventListener("click", (e)=>{
         changeSlide(e.target.id);
     }
 })
+/****************** CALCULATOR *******************/
+let result = document.querySelector(".calculating__result");
+let height, weight, age, gender = "female", ratio = "1.375";
+
+const calculateCalories = ()=>{
+    if(!height || !weight || !age || !gender || !ratio){
+        result.textContent = "-----"
+        return;
+    }
+
+    if(gender === "male"){
+        result.textContent = `${Math.floor((88.36 + (13.4*weight) + (4.8*height) - (5.7*age))*ratio)}`
+    }else{
+        result.textContent = `${Math.floor((447.6 + (9.2*weight) + (3.1*height) - (4.3*age))*ratio)}`
+    }
+}
+calculateCalories();
+
+const getStaticCalcData = (parentContainer)=>{
+    let elements = document.querySelectorAll(`${parentContainer} div`)
+    document.querySelector(parentContainer).addEventListener("click", (e)=>{
+        if(e.target.getAttribute("data-ratio")){
+            ratio = +e.target.getAttribute("data-ratio");
+        }else if(e.target.getAttribute("id")){
+            gender = e.target.getAttribute("id");
+        }
+        elements.forEach(element=>element.classList.remove("calculating__choose-item_active"));
+        if(e.target.className == "calculating__choose-item"){e.target.classList.add("calculating__choose-item_active")} 
+        calculateCalories();
+    })
+}
+getStaticCalcData("#gender");
+getStaticCalcData(".calculating__choose_big");
+
+const getDynamicCalcData = (selector)=>{
+    let input = document.querySelector(selector);
+    input.addEventListener("input",()=>{
+        switch(input.getAttribute("id")){
+            case "height":
+                height = +input.value;
+                break;
+            case "weight":
+                weight = +input.value;
+                break;
+            case "age":
+                age = +input.value;
+                break;
+        }
+        calculateCalories();
+    })
+}
+getDynamicCalcData("#height");
+getDynamicCalcData("#weight");
+getDynamicCalcData("#age");
