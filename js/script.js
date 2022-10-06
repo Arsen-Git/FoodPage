@@ -60,3 +60,33 @@ contactBtns.forEach(btn=>{
         })
     }
 })
+/****************** SLIDER *******************/
+let slides = document.querySelectorAll(".offer__slide");
+
+let currentSlideNum = document.getElementById("current");
+let totalSlideNum = document.getElementById("total");
+
+totalSlideNum.textContent = `${slides.length}`;
+
+const changeSlide = (option)=>{
+    let currentNum = +currentSlideNum.textContent;
+    if(option == "next"){
+        currentSlideNum.textContent = `${currentNum==slides.length? currentNum**0: ++currentNum}`
+    }else if(option == "prev"){
+        currentSlideNum.textContent = `${currentNum==1? slides.length: --currentNum}`
+    }
+    slides.forEach(slide=>{
+        slide.style.display = "none";
+        if(slide.id == currentSlideNum.textContent){
+            slide.style.display = "block";
+        }
+    })
+}
+changeSlide();
+
+let slider = document.querySelector(".offer__slider");
+slider.addEventListener("click", (e)=>{
+    if(e.target.className == "offer__slider-prev" || e.target.className == "offer__slider-next"){
+        changeSlide(e.target.id);
+    }
+})
