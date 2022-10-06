@@ -34,3 +34,29 @@ heroMenuItemsContainer.addEventListener("click", (e)=>{
         }
     }
 })
+/****************** MODAL *******************/
+const modalTimer = setTimeout(()=>{
+    showModal();
+},15000);
+
+const showModal = () => {
+    clearTimeout(modalTimer);
+    let modalContent = document.querySelector(".modal");
+    modalContent.style.display = "block";
+    document.body.style.overflow = "hidden";
+    document.body.addEventListener("click",(e)=>{
+        if(e.target.className == "modal" || e.target.className == "modal__close"){
+            modalContent.style.display = "none";
+            document.body.style.overflow = "";
+        }
+    })
+}
+
+let contactBtns = document.querySelectorAll(".btn");
+contactBtns.forEach(btn=>{
+    if(btn.textContent == "Связаться с нами"){
+        btn.addEventListener("click",()=>{
+            showModal();
+        })
+    }
+})
