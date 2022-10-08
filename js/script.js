@@ -144,3 +144,40 @@ const getDynamicCalcData = (selector)=>{
 getDynamicCalcData("#height");
 getDynamicCalcData("#weight");
 getDynamicCalcData("#age");
+/****************** TIMER *******************/
+const endPoint = Date.parse(new Date("12/31/2022"));
+
+const daysSelector = document.querySelector("#days");
+const hoursSelector = document.querySelector("#hours");
+const minutesSelector = document.querySelector("#minutes");
+const secondsSelector = document.querySelector("#seconds");
+
+const parseDate = (date) => {
+    let days = Math.floor(date/(1000*60*60*24));
+    let hours = Math.floor(date/(1000*60*60) % 24);
+    let minutes = Math.floor(date/(1000*60) % 60);
+    let seconds = Math.floor((date/1000) % 60);
+    return{
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    }
+}
+
+const setTimer = () => {
+    setInterval(()=>{
+        let dateNow = new Date();
+
+        let secondsNow = Date.parse(dateNow);
+        let secondsToEnd = endPoint - secondsNow;
+
+        const resultObj = parseDate(secondsToEnd);
+
+        daysSelector.innerHTML = `${resultObj.days}`;
+        hoursSelector.innerHTML = `${resultObj.hours < 10? "0"+resultObj.hours: resultObj.hours}`;
+        minutesSelector.innerHTML = `${resultObj.minutes < 10? "0"+resultObj.minutes: resultObj.minutes}`;
+        secondsSelector.innerHTML = `${resultObj.seconds < 10? "0"+resultObj.seconds: resultObj.seconds}`;
+    },1000)
+}
+setTimer();
